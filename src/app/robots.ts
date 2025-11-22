@@ -6,6 +6,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: '*',
       allow: '/',
     },
-    sitemap: 'https://excuse.misael.dev.br/sitemap.xml',
+    sitemap: 'https://manah.misael.dev.br/sitemap.xml',
   }
 }

@@ -1,157 +1,77 @@
-# 🎴 Excuse Boss - Gerador de Desculpas Criativas
+# Manah Diário 📖✨
 
-Um gerador de desculpas ridículas e criativas para faltar ao trabalho! Combine três categorias diferentes para criar mais de **8.000 combinações únicas** de desculpas absurdas.
+**Manah Diário** é uma aplicação web interativa que simula uma "Caixinha de Promessas" virtual. O projeto oferece uma experiência visual imersiva e moderna para o sorteio diário de versículos bíblicos, permitindo que os usuários recebam uma palavra de conforto e esperança e a compartilhem facilmente com amigos e familiares.
 
-![Excuse Boss](./public/excuse.png)
+![Manah Diário Preview](/public/card.png)
 
-## 🚀 Demo
+## 🚀 Funcionalidades
 
-Acesse a aplicação em produção: **[https://excuse.misael.dev.br](https://excuse.misael.dev.br)**
+-   **Caixinha de Promessas 3D**: Uma representação visual interativa de uma caixinha de promessas, com animações fluidas e perspectiva 3D.
+-   **Sorteio Aleatório**: Seleção randômica de versículos baseada na Bíblia King James Atualizada (KJA).
+-   **Design Moderno**: Interface limpa, tema escuro (Dark Mode) e tipografia elegante, inspirada em designs futuristas.
+-   **Compartilhamento Inteligente**:
+    -   Integração direta com WhatsApp.
+    -   Geração dinâmica de imagens (Open Graph) para pré-visualização rica em redes sociais.
+    -   Links profundos (Deep Linking) que levam o usuário diretamente para o versículo compartilhado.
 
-## ✨ Funcionalidades
+## 🛠️ Tecnologias Utilizadas
 
-- 🎴 **Interface de Cards Animados**: Três pilhas de cartas com efeito de flip 3D e animações de saída
-- 🎲 **8.000+ Combinações**: 20 opções em cada categoria (Razão Principal, Nível de Gravidade, Contexto Adicional)
-- 🔄 **Sistema de Ciclagem**: Impede repetições até que todas as opções sejam usadas
-- 💬 **Compartilhamento WhatsApp**: Botão integrado para compartilhar sua desculpa criativa
-- 📱 **PWA**: Aplicação Progressive Web App instalável
-- 🎨 **Design Vibrante**: Paleta de cores divertida com gradientes roxo, rosa e azul
-- 🌟 **Totalmente Responsivo**: Otimizado para desktop e dispositivos móveis
-- ⚡ **Performance**: Construído com Next.js 14 e otimizado para velocidade
-- 🔍 **SEO Otimizado**: Meta tags, Open Graph, Twitter Cards e dados estruturados JSON-LD
+Este projeto foi construído utilizando as tecnologias mais recentes do ecossistema React:
 
-## 🛠️ Tecnologias
+-   **[Next.js 16](https://nextjs.org/)**: Framework React para produção, utilizando App Router e Server Components.
+-   **[React 19](https://react.dev/)**: Biblioteca JavaScript para construção de interfaces de usuário.
+-   **[Framer Motion](https://www.framer.com/motion/)**: Biblioteca poderosa para animações complexas, utilizada para criar o efeito de retirada dos cards, o flip 3D e a interatividade da caixinha.
+-   **[Tailwind CSS](https://tailwindcss.com/)**: Framework CSS utilitário para estilização rápida e responsiva.
+-   **[Lucide React](https://lucide.dev/)**: Biblioteca de ícones leve e consistente.
+-   **[Next/OG](https://vercel.com/docs/functions/edge-functions/og-image-generation)**: Geração de imagens dinâmicas no servidor para compartilhamento social.
 
-- **[Next.js 14](https://nextjs.org/)** - Framework React com App Router
-- **[TypeScript](https://www.typescriptlang.org/)** - Tipagem estática
-- **[Tailwind CSS](https://tailwindcss.com/)** - Framework CSS utilitário
-- **[Radix UI](https://www.radix-ui.com/)** - Componentes acessíveis (via shadcn/ui)
-- **[Lucide React](https://lucide.dev/)** - Biblioteca de ícones
-- **React Hooks** - Gerenciamento de estado
-- **CSS Animations** - Animações personalizadas de flip e trajetórias
+## 🎲 Como Funciona o Sorteio
 
-## 📦 Instalação
+O coração da aplicação reside na lógica de seleção dos versículos:
 
-### Pré-requisitos
+1.  **Base de Dados**: O projeto utiliza um arquivo JSON (`src/KJA.json`) contendo a estrutura completa da Bíblia (Livros, Capítulos e Versículos) na versão King James Atualizada.
+2.  **Algoritmo de Seleção**:
+    -   Ao clicar na caixinha, o sistema seleciona aleatoriamente um **Livro** da lista.
+    -   Dentro desse livro, um **Capítulo** é sorteado.
+    -   Por fim, um **Versículo** específico é escolhido dentro do capítulo.
+3.  **Exibição**: O versículo é renderizado em um "card" virtual com cores variadas (tons pastéis e vibrantes) para tornar a experiência visualmente agradável.
 
-- Node.js 18+ instalado
-- pnpm (ou npm/yarn)
+## 📦 Instalação e Execução
 
-### Passos
+Para rodar o projeto localmente:
 
-1. Clone o repositório:
+1.  Clone o repositório:
+    ```bash
+    git clone https://github.com/misaelbr/manah-diario.git
+    ```
 
-```bash
-git clone https://github.com/misaelbr/excuse.git
-cd excuse
-```
+2.  Instale as dependências:
+    ```bash
+    pnpm install
+    # ou
+    npm install
+    ```
 
-2. Instale as dependências:
+3.  Execute o servidor de desenvolvimento:
+    ```bash
+    pnpm dev
+    # ou
+    npm run dev
+    ```
 
-```bash
-pnpm install
-```
+4.  Abra [http://localhost:3000](http://localhost:3000) no seu navegador.
 
-3. Execute o servidor de desenvolvimento:
+## 📱 Compartilhamento e SEO
 
-```bash
-pnpm dev
-```
+O projeto foi otimizado para SEO e compartilhamento social:
 
-4. Abra [http://localhost:3000](http://localhost:3000) no navegador
-
-## 🏗️ Estrutura do Projeto
-
-```
-excuse/
-├── public/
-│   ├── excuse.png              # Imagem de preview/screenshot
-│   ├── manifest.json            # PWA manifest
-│   ├── browserconfig.xml        # Configuração Windows tiles
-│   └── [favicons]               # Ícones multi-plataforma
-├── src/
-│   ├── app/
-│   │   ├── layout.tsx           # Layout raiz com metadata
-│   │   ├── page.tsx             # Página principal
-│   │   ├── sitemap.ts           # Gerador de sitemap
-│   │   ├── robots.ts            # Configuração robots.txt
-│   │   └── globals.css          # Estilos globais + animações
-│   ├── components/
-│   │   ├── excuse-card.tsx      # Componente de card com animações
-│   │   ├── whatsapp-share.tsx   # Botão de compartilhamento
-│   │   ├── structured-data.tsx  # Dados estruturados SEO
-│   │   ├── theme-provider.tsx   # Provider de tema
-│   │   └── ui/                  # Componentes shadcn/ui
-│   ├── lib/
-│   │   └── utils.ts             # Utilitários
-│   └── api/
-│       └── generate.ts          # (Placeholder) API de geração
-├── components.json              # Configuração shadcn/ui
-├── tailwind.config.ts           # Configuração Tailwind
-├── tsconfig.json                # Configuração TypeScript
-└── package.json
-```
-
-## 🎯 Como Funciona
-
-1. **Selecione suas desculpas**: Clique em cada pilha de cartas para revelar uma opção aleatória
-2. **Veja a animação**: Cada carta tem um efeito de flip 3D ao ser revelada
-3. **Descarte e escolha outra**: Clique novamente para descartar a carta com animação de saída
-4. **Monte sua desculpa completa**: Combine as três categorias para criar sua desculpa perfeita
-5. **Compartilhe**: Use o botão do WhatsApp para enviar sua desculpa criativa
-
-## 🌐 SEO e Compartilhamento Social
-
-O projeto inclui otimizações completas de SEO:
-
-- ✅ Meta tags otimizadas (título, descrição, palavras-chave)
-- ✅ Open Graph para Facebook e LinkedIn
-- ✅ Twitter Cards para visualizações ricas
-- ✅ Dados estruturados JSON-LD (WebApplication schema)
-- ✅ Sitemap.xml automático
-- ✅ Robots.txt configurado
-- ✅ Favicon multi-plataforma (iOS, Android, Windows)
-- ✅ PWA Manifest para instalação
-
-## 🎨 Paleta de Cores
-
-- **Primária**: Purple (`#a855f7`) - Roxo vibrante
-- **Secundária**: Pink (`#ec4899`) - Rosa energético
-- **Terciária**: Blue (`#3b82f6`) - Azul profundo
-- **Background**: Gradient radial roxo/rosa/azul
-
-## 📝 Scripts Disponíveis
-
-```bash
-pnpm dev          # Servidor de desenvolvimento
-pnpm build        # Build de produção
-pnpm start        # Iniciar servidor de produção
-pnpm lint         # Verificar código com ESLint
-```
-
-## 🤝 Contribuindo
-
-Contribuições são bem-vindas! Sinta-se à vontade para:
-
-1. Fazer fork do projeto
-2. Criar uma branch de feature (`git checkout -b feature/nova-funcionalidade`)
-3. Commit suas mudanças (`git commit -m 'feat: adiciona nova funcionalidade'`)
-4. Push para a branch (`git push origin feature/nova-funcionalidade`)
-5. Abrir um Pull Request
+-   **Meta Tags Dinâmicas**: Cada versículo compartilhado gera meta tags específicas.
+-   **OG Image Generation**: Uma rota de API (`/api/og`) cria imagens em tempo real contendo o texto do versículo e a referência bíblica, garantindo que o link compartilhado no WhatsApp, Twitter ou Facebook tenha uma aparência profissional e atraente.
 
 ## 📄 Licença
 
-Este projeto é open source e está disponível sob a [Licença MIT](LICENSE).
-
-## 👤 Autor
-
-**Misael**
-
-- Website: [https://excuse.misael.dev.br](https://excuse.misael.dev.br)
-- GitHub: [@misaelbr](https://github.com/misaelbr)
+Este projeto está sob a licença MIT. Sinta-se à vontade para contribuir ou utilizar como base para seus próprios projetos.
 
 ---
 
-<div align="center">
-  Feito com ❤️ e muito humor absurdo
-</div>
+Feito com ❤️ por [Misael](https://github.com/misaelbr)

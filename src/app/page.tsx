@@ -7,7 +7,9 @@ type Props = {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>
 }
 
-export async function generateMetadata({ searchParams }: Props): Promise<Metadata> {
+export async function generateMetadata({
+  searchParams,
+}: Props): Promise<Metadata> {
   const params = await searchParams
   const b = params.b
   const c = params.c
@@ -39,13 +41,13 @@ export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-center bg-[#0b0f19] p-4 selection:bg-purple-500/30">
       <div className="flex flex-col items-center space-y-10">
-        <div className="text-center space-y-4">
-          <h1 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent font-sans tracking-tight drop-shadow-sm">
+        <div className="space-y-4 text-center">
+          <h1 className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text font-sans text-5xl font-bold tracking-tight text-transparent drop-shadow-sm md:text-6xl">
             Manah Diário
           </h1>
-          <p className="text-slate-400 max-w-md text-lg leading-relaxed font-light">
+          <p className="max-w-md text-lg font-light leading-relaxed text-slate-400">
             Tire um tempo para ler uma promessa da palavra de Deus. <br />
-            <span className="text-slate-500 text-sm">
+            <span className="text-sm text-slate-500">
               Clique na caixinha para retirar um versículo.
             </span>
           </p>
