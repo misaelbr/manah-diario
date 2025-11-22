@@ -26,12 +26,17 @@ const CARD_COLORS = [
   '#f472b6',
 ]
 
-export function PromiseBox() {
-  const [currentVerse, setCurrentVerse] = useState<Verse | null>(null)
+export function PromiseBox({ initialVerse }: { initialVerse?: Verse | null }) {
+  const [currentVerse, setCurrentVerse] = useState<Verse | null>(initialVerse || null)
   const [cardColor, setCardColor] = useState<string>('')
   const searchParams = useSearchParams()
 
   useEffect(() => {
+    if (initialVerse) {
+      setCardColor(CARD_COLORS[Math.floor(Math.random() * CARD_COLORS.length)])
+      return
+    }
+
     const book = searchParams.get('b')
     const chapter = searchParams.get('c')
     const verse = searchParams.get('v')
@@ -45,7 +50,7 @@ export function PromiseBox() {
         )
       }
     }
-  }, [searchParams])
+  }, [searchParams, initialVerse])
 
   const handleDrawCard = () => {
     const verse = getRandomVerse()

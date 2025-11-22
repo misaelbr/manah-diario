@@ -37,7 +37,7 @@ export function PromiseCard({ verse, color, onClose }: PromiseCardProps) {
         <div className="mt-4 flex flex-col items-center gap-4">
           <button
             onClick={() => {
-              const shareUrl = `${window.location.origin}?b=${verse.bookAbbrev}&c=${verse.chapter}&v=${verse.verse}`
+              const shareUrl = `${window.location.origin}/${verse.bookAbbrev}/${verse.chapter}/${verse.verse}`
               const text = `*${verse.bookName} ${verse.chapter}:${verse.verse}*\n"${verse.text}"\n\nReceba sua promessa diária aqui: ${shareUrl}`
               window.open(
                 `https://wa.me/?text=${encodeURIComponent(text)}`,
