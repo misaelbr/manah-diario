@@ -2,6 +2,7 @@ import './globals.css'
 
 import type { Metadata } from 'next'
 import localFont from 'next/font/local'
+import Script from 'next/script'
 
 import StructuredData from '@/components/structured-data'
 import { ThemeProvider } from '@/components/theme-provider'
@@ -144,6 +145,19 @@ export default function RootLayout({
         >
           {children}
         </ThemeProvider>
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-K6BZ49FF4C"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-K6BZ49FF4C');
+          `}
+        </Script>
       </body>
     </html>
   )

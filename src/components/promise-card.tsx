@@ -39,6 +39,14 @@ export function PromiseCard({ verse, color, onClose }: PromiseCardProps) {
             onClick={() => {
               const shareUrl = `${window.location.origin}/${verse.bookAbbrev}/${verse.chapter}/${verse.verse}`
               const text = `*${verse.bookName} ${verse.chapter}:${verse.verse}*\n"${verse.text}"\n\nReceba sua promessa diária aqui: ${shareUrl}`
+              
+              if (typeof window !== 'undefined' && (window as any).gtag) {
+                ;(window as any).gtag('event', 'share_promise', {
+                  event_category: 'engagement',
+                  event_label: `${verse.bookName} ${verse.chapter}:${verse.verse}`,
+                })
+              }
+
               window.open(
                 `https://wa.me/?text=${encodeURIComponent(text)}`,
                 '_blank',
