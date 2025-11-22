@@ -1,6 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
+
 import { Verse } from '@/lib/bible'
 
 interface PromiseCardProps {
@@ -11,25 +12,28 @@ interface PromiseCardProps {
 
 export function PromiseCard({ verse, color, onClose }: PromiseCardProps) {
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4 backdrop-blur-sm" onClick={onClose}>
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4 backdrop-blur-sm"
+      onClick={onClose}
+    >
       <motion.div
         initial={{ scale: 0.5, opacity: 0, rotateY: 180, y: 100 }}
         animate={{ scale: 1, opacity: 1, rotateY: 0, y: 0 }}
         exit={{ scale: 0.5, opacity: 0, rotateY: -180 }}
         transition={{ type: 'spring', damping: 15, stiffness: 100 }}
         className="relative flex aspect-[3/4] w-full max-w-sm flex-col items-center justify-center rounded-xl p-8 text-center shadow-2xl"
-        style={{ 
+        style={{
           background: `linear-gradient(135deg, ${color}, white)`,
         }}
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex flex-1 flex-col items-center justify-center space-y-6 overflow-y-auto">
-          <p className="text-xl font-medium leading-relaxed text-slate-800 font-sans tracking-tight">
+          <p className="font-sans text-xl font-medium leading-relaxed tracking-tight text-slate-800">
             "{verse.text}"
           </p>
           <div className="h-px w-1/2 bg-slate-800/20"></div>
           <div className="flex flex-col items-center">
-            <span className="text-2xl font-bold text-slate-900 font-sans tracking-tight">
+            <span className="font-sans text-2xl font-bold tracking-tight text-slate-900">
               {verse.bookName} {verse.chapter}:{verse.verse}
             </span>
           </div>
@@ -39,12 +43,17 @@ export function PromiseCard({ verse, color, onClose }: PromiseCardProps) {
             onClick={() => {
               const shareUrl = `${window.location.origin}/${verse.bookAbbrev}/${verse.chapter}/${verse.verse}`
               const text = `*${verse.bookName} ${verse.chapter}:${verse.verse}*\n"${verse.text}"\n\nReceba sua promessa diária aqui: ${shareUrl}`
-              
-              if (typeof window !== 'undefined' && (window as any).gtag) {
-                ;(window as any).gtag('event', 'share_promise', {
-                  event_category: 'engagement',
-                  event_label: `${verse.bookName} ${verse.chapter}:${verse.verse}`,
-                })
+
+              if (typeof window !== 'undefined') {
+                const gtag = (
+                  window as Window & { gtag?: (...args: unknown[]) => void }
+                ).gtag
+                if (gtag) {
+                  gtag('event', 'share_promise', {
+                    event_category: 'engagement',
+                    event_label: `${verse.bookName} ${verse.chapter}:${verse.verse}`,
+                  })
+                }
               }
 
               window.open(

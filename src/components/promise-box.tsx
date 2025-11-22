@@ -27,7 +27,9 @@ const CARD_COLORS = [
 ]
 
 export function PromiseBox({ initialVerse }: { initialVerse?: Verse | null }) {
-  const [currentVerse, setCurrentVerse] = useState<Verse | null>(initialVerse || null)
+  const [currentVerse, setCurrentVerse] = useState<Verse | null>(
+    initialVerse || null,
+  )
   const [cardColor, setCardColor] = useState<string>('')
   const searchParams = useSearchParams()
 
