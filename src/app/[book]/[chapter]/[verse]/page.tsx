@@ -18,21 +18,19 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     }
   }
 
-  const ogUrl = `/api/og?b=${book}&c=${chapter}&v=${verse}`
-
   return {
     title: `Manah Diário | ${verseData.bookName} ${verseData.chapter}:${verseData.verse}`,
     description: `"${verseData.text}" - Receba sua promessa diária.`,
     openGraph: {
       title: `Manah Diário | ${verseData.bookName} ${verseData.chapter}:${verseData.verse}`,
       description: `"${verseData.text}"`,
-      images: [ogUrl],
+      images: ['/card.png'],
     },
     twitter: {
       card: 'summary_large_image',
       title: `Manah Diário | ${verseData.bookName} ${verseData.chapter}:${verseData.verse}`,
       description: `"${verseData.text}"`,
-      images: [ogUrl],
+      images: ['/card.png'],
     },
   }
 }
