@@ -91,7 +91,7 @@ export function PromiseBox({ initialVerse }: { initialVerse?: Verse | null }) {
                 key={i}
                 className="absolute h-full w-full rounded-lg border-x border-t border-white/20 shadow-sm transition-transform duration-300 group-hover:-translate-y-2"
                 style={{
-                  transform: `translateZ(${i * 2 - 40}px) rotate(${Math.random() * 2 - 1}deg)`,
+                  transform: `translateZ(${i * 2 - 40}px) rotate(${Math.sin(i * 123) * 1}deg)`,
                   backgroundColor: CARD_COLORS[i % CARD_COLORS.length],
                 }}
               />

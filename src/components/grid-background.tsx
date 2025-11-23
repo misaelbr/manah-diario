@@ -67,13 +67,13 @@ export function GridBackground() {
             animate={{
               x: particle.x,
               y: particle.y,
-              opacity: [0, 1, 1, 0],
+              opacity: 1,
             }}
             initial={{ opacity: 0 }}
             transition={{
-              x: { duration: 2, ease: 'linear' },
-              y: { duration: 2, ease: 'linear' },
-              opacity: { duration: 2, times: [0, 0.1, 0.9, 1] },
+              duration: 2,
+              ease: 'linear',
+              opacity: { duration: 0.5 },
             }}
           />
         ))}
