@@ -37,6 +37,7 @@ export function PromiseCard({ verse, color, onClose }: PromiseCardProps) {
             card.style.overflow = 'visible'
             card.style.height = 'auto'
             card.style.maxHeight = 'none'
+            card.style.borderRadius = '0'
           }
 
           if (isOverflowing) {
