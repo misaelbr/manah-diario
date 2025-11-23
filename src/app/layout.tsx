@@ -1,11 +1,17 @@
 import './globals.css'
 
 import type { Metadata } from 'next'
+import { Playpen_Sans } from 'next/font/google'
 import localFont from 'next/font/local'
 import Script from 'next/script'
 
 import StructuredData from '@/components/structured-data'
 import { ThemeProvider } from '@/components/theme-provider'
+
+const playpenSans = Playpen_Sans({
+  subsets: ['latin'],
+  variable: '--font-playpen-sans',
+})
 
 const geistSans = localFont({
   src: './fonts/GeistVF.woff',
@@ -136,7 +142,7 @@ export default function RootLayout({
         <meta name="theme-color" content="#a855f7" />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${playpenSans.variable} antialiased`}
       >
         <ThemeProvider
           attribute="class"

@@ -29,7 +29,7 @@ export function PromiseCard({ verse, color, onClose }: PromiseCardProps) {
       >
         <div className="flex w-full flex-1 flex-col overflow-y-auto">
           <div className="m-auto flex w-full flex-col items-center space-y-6 py-2">
-            <p className="font-sans text-xl font-medium leading-relaxed tracking-tight text-slate-800">
+            <p className="font-playpen text-xl font-medium leading-relaxed tracking-tight text-slate-800">
               "{verse.text}"
             </p>
             <div className="h-px w-1/2 shrink-0 bg-slate-800/20"></div>
