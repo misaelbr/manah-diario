@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion'
 import html2canvas from 'html2canvas'
-import { Download } from 'lucide-react'
+import { Instagram } from 'lucide-react'
 import { useRef } from 'react'
 
 import { Verse } from '@/lib/bible'
@@ -16,7 +16,7 @@ interface PromiseCardProps {
 export function PromiseCard({ verse, color, onClose }: PromiseCardProps) {
   const cardRef = useRef<HTMLDivElement>(null)
 
-  const handleDownload = async () => {
+  const handleInstagramShare = async () => {
     if (!cardRef.current) return
 
     const isOverflowing =
@@ -49,27 +49,71 @@ export function PromiseCard({ verse, color, onClose }: PromiseCardProps) {
         },
       })
 
-      const image = canvas.toDataURL('image/png')
-      const link = document.createElement('a')
-      link.href = image
-      link.download = `manah-diario-${verse.bookAbbrev}-${verse.chapter}-${verse.verse}.png`
-      document.body.appendChild(link)
-      link.click()
-      document.body.removeChild(link)
+      canvas.toBlob(async (blob) => {
+        if (!blob) return
 
-      if (typeof window !== 'undefined') {
-        const gtag = (
-          window as Window & { gtag?: (...args: unknown[]) => void }
-        ).gtag
-        if (gtag) {
-          gtag('event', 'download_promise', {
-            event_category: 'engagement',
-            event_label: `${verse.bookName} ${verse.chapter}:${verse.verse}`,
-          })
+        const file = new File(
+          [blob],
+          `manah-diario-${verse.bookAbbrev}-${verse.chapter}-${verse.verse}.png`,
+          { type: 'image/png' },
+        )
+
+        if (
+          navigator.share &&
+          navigator.canShare &&
+          navigator.canShare({ files: [file] })
+        ) {
+          try {
+            await navigator.share({
+              files: [file],
+              title: 'Manah Diário',
+              text: `Minha promessa de hoje: ${verse.bookName} ${verse.chapter}:${verse.verse}`,
+            })
+
+            if (typeof window !== 'undefined') {
+              const gtag = (
+                window as Window & { gtag?: (...args: unknown[]) => void }
+              ).gtag
+              if (gtag) {
+                gtag('event', 'share_instagram', {
+                  event_category: 'engagement',
+                  event_label: `${verse.bookName} ${verse.chapter}:${verse.verse}`,
+                })
+              }
+            }
+          } catch (error) {
+            if ((error as Error).name !== 'AbortError') {
+              console.error('Error sharing:', error)
+              downloadImage(canvas)
+            }
+          }
+        } else {
+          downloadImage(canvas)
         }
-      }
+      }, 'image/png')
     } catch (error) {
       console.error('Error generating image:', error)
+    }
+  }
+
+  const downloadImage = (canvas: HTMLCanvasElement) => {
+    const image = canvas.toDataURL('image/png')
+    const link = document.createElement('a')
+    link.href = image
+    link.download = `manah-diario-${verse.bookAbbrev}-${verse.chapter}-${verse.verse}.png`
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
+
+    if (typeof window !== 'undefined') {
+      const gtag = (window as Window & { gtag?: (...args: unknown[]) => void })
+        .gtag
+      if (gtag) {
+        gtag('event', 'download_promise', {
+          event_category: 'engagement',
+          event_label: `${verse.bookName} ${verse.chapter}:${verse.verse}`,
+        })
+      }
     }
   }
 
@@ -160,11 +204,11 @@ export function PromiseCard({ verse, color, onClose }: PromiseCardProps) {
               Compartilhar
             </button>
             <button
-              onClick={handleDownload}
-              className="flex items-center gap-2 rounded-full bg-slate-800 px-4 py-2 text-sm font-bold text-white transition-transform hover:scale-105 active:scale-95"
-              title="Baixar imagem"
+              onClick={handleInstagramShare}
+              className="flex items-center gap-2 rounded-full bg-gradient-to-tr from-[#f09433] via-[#bc1888] to-[#2f55a4] px-4 py-2 text-sm font-bold text-white transition-transform hover:scale-105 active:scale-95"
+              title="Compartilhar no Instagram"
             >
-              <Download size={20} />
+              <Instagram size={20} />
             </button>
           </div>
           <div className="text-xs font-medium uppercase tracking-wider text-slate-600">
