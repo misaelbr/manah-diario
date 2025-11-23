@@ -7,12 +7,16 @@
 ## 🚀 Funcionalidades
 
 -   **Caixinha de Promessas 3D**: Uma representação visual interativa de uma caixinha de promessas, com animações fluidas e perspectiva 3D.
--   **Sorteio Aleatório**: Seleção randômica de versículos baseada na Bíblia King James Atualizada (KJA).
--   **Design Moderno**: Interface limpa, tema escuro (Dark Mode) e tipografia elegante, inspirada em designs futuristas.
--   **Compartilhamento Inteligente**:
-    -   Integração direta com WhatsApp.
-    -   Geração dinâmica de imagens (Open Graph) para pré-visualização rica em redes sociais.
-    -   Links profundos (Deep Linking) que levam o usuário diretamente para o versículo compartilhado.
+-   **Curadoria de Promessas**: Seleção de versículos especialmente curados para trazer conforto e esperança, baseados na Bíblia King James Atualizada (KJA).
+-   **Design Moderno e Imersivo**:
+    -   Interface limpa com tema escuro (Dark Mode).
+    -   Fundo animado com grid e partículas flutuantes.
+    -   Tipografia elegante ("Playpen Sans") para melhor legibilidade.
+-   **Compartilhamento Avançado**:
+    -   **Instagram & Stories**: Exportação do card como imagem (PNG) otimizada para redes sociais (formato quadrado, sem bordas arredondadas).
+    -   **WhatsApp**: Compartilhamento direto com link e texto formatado.
+    -   **Nativo (Mobile)**: Integração com a API de compartilhamento nativo do dispositivo (`navigator.share`).
+    -   **Ajuste Inteligente**: Redimensionamento automático da fonte na imagem gerada para evitar cortes em versículos longos.
 
 ## 🛠️ Tecnologias Utilizadas
 
@@ -20,21 +24,22 @@ Este projeto foi construído utilizando as tecnologias mais recentes do ecossist
 
 -   **[Next.js 16](https://nextjs.org/)**: Framework React para produção, utilizando App Router e Server Components.
 -   **[React 19](https://react.dev/)**: Biblioteca JavaScript para construção de interfaces de usuário.
--   **[Framer Motion](https://www.framer.com/motion/)**: Biblioteca poderosa para animações complexas, utilizada para criar o efeito de retirada dos cards, o flip 3D e a interatividade da caixinha.
+-   **[Framer Motion](https://www.framer.com/motion/)**: Biblioteca poderosa para animações complexas (cards, flip 3D, partículas).
 -   **[Tailwind CSS](https://tailwindcss.com/)**: Framework CSS utilitário para estilização rápida e responsiva.
+-   **[html2canvas](https://html2canvas.hertzen.com/)**: Conversão de elementos DOM em imagens para download/compartilhamento.
 -   **[Lucide React](https://lucide.dev/)**: Biblioteca de ícones leve e consistente.
--   **[Next/OG](https://vercel.com/docs/functions/edge-functions/og-image-generation)**: Geração de imagens dinâmicas no servidor para compartilhamento social.
+-   **[Google Analytics](https://analytics.google.com/)**: Monitoramento de engajamento (downloads e compartilhamentos).
 
-## 🎲 Como Funciona o Sorteio
+## 🎲 Como Funciona
 
-O coração da aplicação reside na lógica de seleção dos versículos:
+O sistema utiliza uma abordagem híbrida para entregar a melhor experiência:
 
-1.  **Base de Dados**: O projeto utiliza um arquivo JSON (`src/KJA.json`) contendo a estrutura completa da Bíblia (Livros, Capítulos e Versículos) na versão King James Atualizada.
-2.  **Algoritmo de Seleção**:
-    -   Ao clicar na caixinha, o sistema seleciona aleatoriamente um **Livro** da lista.
-    -   Dentro desse livro, um **Capítulo** é sorteado.
-    -   Por fim, um **Versículo** específico é escolhido dentro do capítulo.
-3.  **Exibição**: O versículo é renderizado em um "card" virtual com cores variadas (tons pastéis e vibrantes) para tornar a experiência visualmente agradável.
+1.  **Índice Curado**: O projeto utiliza um arquivo (`src/promessas.json`) contendo uma lista selecionada de referências bíblicas (ex: "Salmos 23:1").
+2.  **Base de Texto**: O texto completo dos versículos é recuperado de um banco de dados JSON (`src/KJA.json`) da versão King James Atualizada.
+3.  **Renderização**:
+    -   Ao clicar na caixinha, uma promessa é sorteada da lista curada.
+    -   O sistema suporta versículos únicos e intervalos (ex: "Versículos 4-5").
+    -   O card é gerado com cores dinâmicas e preparado para exportação visual.
 
 ## 📦 Instalação e Execução
 
