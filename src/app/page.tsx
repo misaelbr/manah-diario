@@ -1,6 +1,7 @@
 import { Metadata } from 'next'
 import { Suspense } from 'react'
 
+import { GridBackground } from '@/components/grid-background'
 import { PromiseBox } from '@/components/promise-box'
 
 type Props = {
@@ -39,8 +40,9 @@ export async function generateMetadata({
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center bg-[#0b0f19] p-4 selection:bg-purple-500/30">
-      <div className="flex flex-col items-center space-y-10">
+    <main className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-[#0b0f19] p-4 selection:bg-purple-500/30">
+      <GridBackground />
+      <div className="relative z-10 flex flex-col items-center space-y-10">
         <div className="space-y-4 text-center">
           <h1 className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text font-sans text-5xl font-bold tracking-tight text-transparent drop-shadow-sm md:text-6xl">
             Manah Diário
