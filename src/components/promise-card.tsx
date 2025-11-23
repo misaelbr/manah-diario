@@ -29,6 +29,16 @@ export function PromiseCard({ verse, color, onClose }: PromiseCardProps) {
         logging: false,
         useCORS: true,
         onclone: (document) => {
+          const card = document.querySelector(
+            '[data-promise-card]',
+          ) as HTMLElement
+
+          if (card) {
+            card.style.overflow = 'visible'
+            card.style.height = 'auto'
+            card.style.maxHeight = 'none'
+          }
+
           if (isOverflowing) {
             const textElement = document.querySelector(
               '[data-promise-text]',
@@ -135,6 +145,7 @@ export function PromiseCard({ verse, color, onClose }: PromiseCardProps) {
       >
         <div
           ref={cardRef}
+          data-promise-card
           className="flex w-full flex-1 flex-col overflow-y-auto rounded-xl p-4"
           style={{
             background: `linear-gradient(135deg, ${color}, white)`,
