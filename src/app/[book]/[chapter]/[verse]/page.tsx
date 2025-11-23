@@ -53,7 +53,7 @@ export default async function VersePage({ params }: Props) {
           <p className="max-w-md text-lg font-light leading-relaxed text-slate-400">
             Tire um tempo para ler uma promessa da palavra de Deus. <br />
             <span className="text-sm text-slate-500">
-              Clique na caixinha para retirar um versículo.
+              Clique na caixinha para retirar uma promessa.
             </span>
           </p>
         </div>

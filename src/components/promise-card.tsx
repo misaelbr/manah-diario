@@ -38,6 +38,8 @@ export function PromiseCard({ verse, color, onClose }: PromiseCardProps) {
             card.style.height = 'auto'
             card.style.maxHeight = 'none'
             card.style.borderRadius = '0'
+            card.style.setProperty('border-radius', '0', 'important')
+            card.classList.remove('rounded-xl')
           }
 
           if (isOverflowing) {
