@@ -10,7 +10,7 @@ type Props = {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { book, chapter, verse } = await params
-  const verseData = getVerse(book, parseInt(chapter), parseInt(verse))
+  const verseData = getVerse(book, parseInt(chapter), verse)
 
   if (!verseData) {
     return {
@@ -18,17 +18,21 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     }
   }
 
+  const verseRange = verseData.endVerse
+    ? `${verseData.verse}-${verseData.endVerse}`
+    : verseData.verse
+
   return {
-    title: `Manah Diário | ${verseData.bookName} ${verseData.chapter}:${verseData.verse}`,
+    title: `Manah Diário | ${verseData.bookName} ${verseData.chapter}:${verseRange}`,
     description: `"${verseData.text}" - Receba sua promessa diária.`,
     openGraph: {
-      title: `Manah Diário | ${verseData.bookName} ${verseData.chapter}:${verseData.verse}`,
+      title: `Manah Diário | ${verseData.bookName} ${verseData.chapter}:${verseRange}`,
       description: `"${verseData.text}"`,
       images: ['/card.png'],
     },
     twitter: {
       card: 'summary_large_image',
-      title: `Manah Diário | ${verseData.bookName} ${verseData.chapter}:${verseData.verse}`,
+      title: `Manah Diário | ${verseData.bookName} ${verseData.chapter}:${verseRange}`,
       description: `"${verseData.text}"`,
       images: ['/card.png'],
     },
@@ -37,7 +41,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function VersePage({ params }: Props) {
   const { book, chapter, verse } = await params
-  const verseData = getVerse(book, parseInt(chapter), parseInt(verse))
+  const verseData = getVerse(book, parseInt(chapter), verse)
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-center bg-[#0b0f19] p-4 selection:bg-purple-500/30">

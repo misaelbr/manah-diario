@@ -21,28 +21,34 @@ export function PromiseCard({ verse, color, onClose }: PromiseCardProps) {
         animate={{ scale: 1, opacity: 1, rotateY: 0, y: 0 }}
         exit={{ scale: 0.5, opacity: 0, rotateY: -180 }}
         transition={{ type: 'spring', damping: 15, stiffness: 100 }}
-        className="relative flex aspect-[3/4] w-full max-w-sm flex-col items-center justify-center rounded-xl p-8 text-center shadow-2xl"
+        className="relative flex aspect-[3/4] max-h-[80vh] w-full max-w-sm flex-col items-center justify-center rounded-xl p-8 text-center shadow-2xl"
         style={{
           background: `linear-gradient(135deg, ${color}, white)`,
         }}
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="flex flex-1 flex-col items-center justify-center space-y-6 overflow-y-auto">
-          <p className="font-sans text-xl font-medium leading-relaxed tracking-tight text-slate-800">
-            "{verse.text}"
-          </p>
-          <div className="h-px w-1/2 bg-slate-800/20"></div>
-          <div className="flex flex-col items-center">
-            <span className="font-sans text-2xl font-bold tracking-tight text-slate-900">
-              {verse.bookName} {verse.chapter}:{verse.verse}
-            </span>
+        <div className="flex w-full flex-1 flex-col overflow-y-auto">
+          <div className="m-auto flex w-full flex-col items-center space-y-6 py-2">
+            <p className="font-sans text-xl font-medium leading-relaxed tracking-tight text-slate-800">
+              "{verse.text}"
+            </p>
+            <div className="h-px w-1/2 shrink-0 bg-slate-800/20"></div>
+            <div className="flex shrink-0 flex-col items-center">
+              <span className="font-sans text-2xl font-bold tracking-tight text-slate-900">
+                {verse.bookName} {verse.chapter}:{verse.verse}
+                {verse.endVerse ? `-${verse.endVerse}` : ''}
+              </span>
+            </div>
           </div>
         </div>
-        <div className="mt-4 flex flex-col items-center gap-4">
+        <div className="mt-4 flex shrink-0 flex-col items-center gap-4">
           <button
             onClick={() => {
-              const shareUrl = `${window.location.origin}/${verse.bookAbbrev}/${verse.chapter}/${verse.verse}`
-              const text = `*${verse.bookName} ${verse.chapter}:${verse.verse}*\n"${verse.text}"\n\nReceba sua promessa diária aqui: ${shareUrl}`
+              const verseRange = verse.endVerse
+                ? `${verse.verse}-${verse.endVerse}`
+                : verse.verse
+              const shareUrl = `${window.location.origin}/${verse.bookAbbrev}/${verse.chapter}/${verseRange}`
+              const text = `*${verse.bookName} ${verse.chapter}:${verseRange}*\n"${verse.text}"\n\nReceba sua promessa diária aqui: ${shareUrl}`
 
               if (typeof window !== 'undefined') {
                 const gtag = (
@@ -51,7 +57,7 @@ export function PromiseCard({ verse, color, onClose }: PromiseCardProps) {
                 if (gtag) {
                   gtag('event', 'share_promise', {
                     event_category: 'engagement',
-                    event_label: `${verse.bookName} ${verse.chapter}:${verse.verse}`,
+                    event_label: `${verse.bookName} ${verse.chapter}:${verseRange}`,
                   })
                 }
               }
